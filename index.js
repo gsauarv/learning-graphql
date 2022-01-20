@@ -2,29 +2,32 @@ const { ApolloServer, gql } = require("apollo-server");
 // typedefinations
 const typeDefs = gql`
   type Query {
-    #   scalar types
-    # types of scalar types (int,float,string,bool)
-    hello: String!
-    numberOfAnimals: Int
-    price: Float
-    isCool: Boolean
+    # object types
+    products: [Product!]!
+  }
+
+  type Product {
+    name: String!
+    description: String!
+    quantity: Int!
+    price: Float!
+    onSale: Boolean!
   }
 `;
 
 // functions that is returning the stings of type defs
 const resolvers = {
   Query: {
-    hello: () => {
-      return "Hello";
-    },
-    numberOfAnimals: () => {
-      return 55;
-    },
-    price: () => {
-      return 254.25;
-    },
-    isCool: () => {
-      return false;
+    products: () => {
+      return [
+        {
+          name: "Bike",
+          description: "This is a mountain bike.",
+          quantity: 10,
+          price: 29.2,
+          onSale: true,
+        },
+      ];
     },
   },
 };
